@@ -3,4 +3,4 @@ npm install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate:refresh --seed
-php aerisan serve
+php artisan serve
