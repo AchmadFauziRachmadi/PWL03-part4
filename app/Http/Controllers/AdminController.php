@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationExeption;
+
+use App\Models\Book;
 
 class AdminController extends Controller
 {
@@ -15,5 +19,11 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         return view('home', compact('user'));
+    }
+    public function books()
+    {
+        $user = Auth::user();
+        $books = Book::all();
+        return view('book', compact('user', 'books'));
     }
 }
