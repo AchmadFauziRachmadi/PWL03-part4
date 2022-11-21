@@ -104,8 +104,9 @@
         @endif
     @endif
 
-    {{ -- Custom Scripts --}}
+    {{-- Custom Scripts --}}
     @yield('adminlte_js')
+
     <script>
         const Toast = Swal.mixin({
             toast: true,
@@ -113,10 +114,8 @@
             showConfirmButton: false,
             time:3000,
         })
-
         @if(Session::has('message'))
             var type = "{{Session::get('alert-type')}}";
-
             switch (type) {
                 case 'info':
                         Toast.fire({
@@ -161,12 +160,10 @@
                 })
             @endforeach
         @endif
-
         $('#table-data').DataTable();
-
         let baseurl = "<?=url('/')?>";
         let fullURL = "<?=url()->full()?>";
-    </script>
+    </script>    
 
 </body>
 
