@@ -1,9 +1,9 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\User;
 
 use Illuminate\Database\Seeder;
-use app\Models\User;
 
 class CreateUserSeeder extends Seeder
 {
@@ -16,15 +16,15 @@ class CreateUserSeeder extends Seeder
     {
         $user = [
             [
-                'name'      => 'IsUser',
-                'username'  => 'IsUser',
+                'name'      => 'isUser',
+                'username'  => 'isUser',
                 'email'     => 'user@gmail.com',
                 'password'  => bcrypt('12345'),
                 'roles_id'  => 2
             ],
             [
-                'name'      => 'IsAdmin',
-                'username'  => 'IsAdmin',
+                'name'      => 'isAdmin',
+                'username'  => 'isAdmin',
                 'email'     => 'admin@gmail.com',
                 'password'  => bcrypt('12345'),
                 'roles_id'  => 1

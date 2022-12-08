@@ -9,9 +9,15 @@
 @section('content')
     <div class="container-fluid">
         <div class="card card-default">
-            <div class="card-header"> {{ __('PengelolaanBuku')}}</div>
+            <div class="card-header"> {{ __('Pengelolaan Buku')}}</div>
             <div class="card-body">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#tambahBukuModal"><i class="fa fa-plus"></i>Tambah Buku</button>
+                <a href="{{ route('admin.print.books') }}" target="_blank" class="btn btn-secondary"><i class="fa fa-print"></i>Cetak PDF</a>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{{ route('admin.book.export') }}" class="btn btn-info" target="_blank">Export</a>
+                    <a href="" class="btn btn-warning">Import</a>
+                </div>
+                <hr/>
                 <table id="table_data" class="table table-bordered">
                     <thead>
                         <tr class="text-center">
@@ -39,7 +45,7 @@
                                     <img src = "{{ asset('storage/cover_buku/'.$book->cover)}}" width = "100px"/>
                                 }
                                 @else
-                                [Gambar Tidak Tersedia]
+                                    [Gambar Tidak Tersedia]
                                 @endif
                             </td>
                             <td>
@@ -110,47 +116,48 @@
                 </button>
             </div>
                     <div class="modal-body">
-                <form method="post" action="{{route('admin.book.update')}}" enctype="multipart/form-data">
-                    @csrf
-                    @method('PATCH')
-                    <div class="row">
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="edit-judul">Judul Buku</label>
-                        <input type="text" class="form-control" name="judul" id="edit-judul" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-penulis">Penulis</label>
-                        <input type="text" class="form-control" name="penulis" id="edit-penulis" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-tahun">Tahun</label>
-                        <input type="year" class="form-control" name="tahun" id="edit-tahun" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-penerbit">Penerbit</label>
-                        <input type="text" class="form-control" name="penerbit" id="edit-penerbit" required/>
-                    </div>
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group" id="image-area"></div>
-                    <div class="form-group" >
-                        <label for="edit-cover">Cover</label>
-                        <input type="file" class="form-control" name="cover" id="edit-cover" required/>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                            <div class="modal-footer">
-                                <input type="hidden" name="id" id="edit-id"/>
-                                <input type="hidden" name="old_cover" id="edit-old-cover"/>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-success">Update</button>  
-                </form>
+                        <form method="post" action="{{route('admin.book.update')}}" enctype="multipart/form-data">
+                            @csrf
+                            @method('PATCH')
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="edit-judul">Judul Buku</label>
+                                        <input type="text" class="form-control" name="judul" id="edit-judul" required/>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="edit-penulis">Penulis</label>
+                                    <input type="text" class="form-control" name="penulis" id="edit-penulis" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-tahun">Tahun</label>
+                                    <input type="year" class="form-control" name="tahun" id="edit-tahun" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-penerbit">Penerbit</label>
+                                    <input type="text" class="form-control" name="penerbit" id="edit-penerbit" required/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="image-area"></div>
+                                    <div class="form-group" >
+                                        <label for="edit-cover">Cover</label>
+                                        <input type="file" class="form-control" name="cover" id="edit-cover" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="id" id="edit-id"/>
+                                        <input type="hidden" name="old_cover" id="edit-old-cover"/>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-success">Update</button>  
+                        </form>
+            </div>
         </div>
-    </div>
-</div> 
-</div>  
+    </div> 
+</div>
+
 @stop
 
 @section('js')
@@ -205,7 +212,7 @@
                     dataType : 'JSON',
                     success: function(result){
                         if(result.success == true){
-                            sqal.fire("Done", result.message, "success");
+                            swal.fire("Done", result.message, "success");
                             setTimeout(function(){
                                 location.reload();
                             },1000);
