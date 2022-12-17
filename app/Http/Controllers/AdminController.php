@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationExeption;
 
 use App\Models\Book;
-use Barryvdh\DomPDF\PDF as DomPDFPDF;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\BooksEksport;
 use App\Imports\BooksImport;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class AdminController extends Controller
 {
@@ -115,7 +115,7 @@ class AdminController extends Controller
     {
         $books = Book::all();
 
-        $pdf = PDF::loadview('print_books',['books'=> $books]);
+        $pdf = Pdf::loadview('print_books',['books'=> $books]);
         return $pdf->download('data_buku.pdf');
     }
 

@@ -6,7 +6,7 @@ use App\Models\Book;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class BooksImport implements ToModel
+class BooksImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row

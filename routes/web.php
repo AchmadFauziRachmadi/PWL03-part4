@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,44 +21,44 @@ Route::get('/', function () {
 //     return $user = Auth::user();
 // })->name('dd');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'dd'])->name('dd')->middleware('auth');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'dd'])->name('dd')->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', 
+    [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', function() {
+//     return view('home');
+// })->name('home')->middleware('auth');
 
 Auth::routes();
-
-Route::get('/home', function() {
-    return view('home');
-    })->name('home')->middleware('auth');
-//
 Route::get('admin/home',
-    [App\Http\Controllers\AdminController::class, 'index'])->name('admin.home')
-    ->middleware('is_admin');    
-//
-Route::get('admin/books',
-    [App\Http\Controllers\AdminController::class, 'books'])->name('admin.books')
-    ->middleware('is_admin');
-//pengelolaan buku
+    [App\Http\Controllers\AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
+
+Route::get('admin/books', 
+    [App\Http\Controllers\AdminController::class, 'books'])->name('admin.books')->middleware('is_admin');
+
 Route::post('admin/books', 
     [App\Http\Controllers\AdminController::class, 'submit_book'])->name('admin.book.submit')->middleware('is_admin');
-//update data buku
+
 Route::patch('admin/books/update', 
     [App\Http\Controllers\AdminController::class, 'update_book'])->name('admin.book.update')->middleware('is_admin');
-//
+
 Route::get('admin/ajaxadmin/dataBuku/{id}', 
     [App\Http\Controllers\AdminController::class, 'getDataBuku']);
-//delete data buku
+
 Route::post('admin/books/delete/{id}', 
     [App\Http\Controllers\AdminController::class, 'delete_book'])->name('admin.book.delete')->middleware('is_admin');
-//print
+
+// print pdf
 Route::get('admin/print_books', 
-    [App\Http\Controllers\AdminController::class, 'print_books'])->name('admin.print_books')->middleware('is_admin');
-//excel export
+    [App\Http\Controllers\AdminController::class, 'print_books'])->name('admin.print.books')->middleware('is_admin');
+
 Route::get('admin/books/export', 
     [App\Http\Controllers\AdminController::class, 'export'])->name('admin.books.export')->middleware('is_admin');
-//import
+
 Route::post('admin/books/import', 
-    [App\Http\Controllers\AdminController::class, 'import'])->name('admin.books.import')->middleware('is_admin');
-//
+    [App\Http\Controllers\AdminController::class, 'import'])->name('admin.book.import')->middleware('is_admin');
